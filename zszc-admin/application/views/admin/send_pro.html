@@ -1,0 +1,135 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en">
+
+<head>
+    <meta http-equiv="Content-Type" content="text/html;charset=UTF-8">
+    <link rel="stylesheet" type="text/css" href="<?php echo base_url() . 'style/admin/css/public.css' ?>">
+
+    <link href="<?php echo base_url() .'style/date/date.css' ?>" type="text/css" rel="stylesheet" />
+
+    <script type="text/javascript" src="<?php echo base_url().'org/ueditor/ueditor.all.min.js' ?>"></script>
+    <script type="text/javascript">
+    window.UEDITOR_HOME_URL = "<?php echo base_url() ?>org/ueditor/";
+    window.onload = function() {
+        window.UEDITOR_CONFIG.initialFrameWidth = 650;
+        window.UEDITOR_CONFIG.initialFrameHeight = 450;
+        var editor = UE.getEditor('pro_text', {
+            //这里可以选择自己需要的工具按钮名称,此处仅选择如下五个  
+            toolbars: [
+                ['bold', 'italic', 'underline', '|', 'insertimage', 'emotion', 'insertvideo', '|', 'link', 'unlink', '|', 'map', '|', 'customstyle', 'paragraph', 'fontfamily', 'fontsize']
+            ],
+            //focus时自动清空初始化时的内容  
+            autoClearinitialContent: false,
+            //关闭字数统计  
+            wordCount: false,
+            //关闭elementPath  
+            elementPathEnabled: false,
+            //默认的编辑区域高度  
+            initialFrameHeight: 300
+            //更多其他参数，请参考ueditor.config.js中的配置项  
+        });
+    }
+    </script>
+    <script type="text/javascript" src="<?php echo base_url().'org/ueditor/ueditor.config.js' ?>"></script>
+
+    <title>Document</title>
+    <style type="text/css">
+    span {
+        color: #f00;
+    }
+    </style>
+</head>
+
+<body>
+    <script type="text/javascript" src="<?php echo base_url() .'style/date/date.js' ?>"></script>
+
+    <form action="<?php echo site_url('admin/all_pro/send') ?>" method="POST" enctype="multipart/form-data">
+        <table class="table">
+            <tr>
+                <td class="th" colspan="10">发表项目</td>
+            </tr>
+            <tr>
+                <td>项目标题</td>
+                <td>
+                    <input type="text" name="pro_title" value="<?php echo set_value('pro_title') ?>" />
+                    <?php echo form_error( 'set_value', '<span>', '</span>') ?>
+                </td>
+            </tr>
+            <tr>
+                <td>项目状态</td>
+                <td>
+                    <select name="pro_status">
+                        <option value="0">正在进行</option>
+                        <option value="1">正在审核</option>
+                        <option value="2">已结束</option>
+                        <option value="3">发起中</option>
+                    </select>
+                </td>
+            </tr>
+            <tr>
+                <td>项目目标</td>
+                <td>
+                    <input type="text" name="pro_goal" value="<?php echo set_value('pro_goal') ?>" />
+                    <?php echo form_error( 'pro_goal', '<span>', '</span>') ?>
+                </td>
+            </tr>
+            <tr>
+                <td>项目持续</td>
+                <td>
+                    <input type="text" name="pro_dur" />
+                </td>
+            </tr>
+            <tr>
+                <td>项目图片</td>
+                <td>
+                    <input type="file" name="thumb" />
+                    <!--                <input type="file" name="thumb1"/>
+                <input type="file" name="thumb2"/> -->
+                </td>
+            </tr>
+
+            <tr>
+                <td>项目概要</td>
+                <td>
+                    <textarea name="pro_text" id="pro_text" style="width:550px;height:160px;">
+                        <h2>关于我（也 可使用个性化小标题）</h2>
+                        <p>向支持者介绍你自己或你的团队，并详细说明你与所发起的项目之间的背景，让支持者能够在最短时间内了解你，以拉近彼此之间的距离。</p>
+                        <h2>我想要做什么（也可使用个性化小标题）</h2>
+                        <p>这是项目介绍中最关键的部分，建议上传5张以上高清图片（宽700、高不限），配合文字来简洁生动地说明你的项目，让支持者对你要做的事情一目了然并充满兴趣。</p>
+                        <h2>为什么我需要你的支持及资金用途（也可使用个性化小标题）</h2>
+                        <p>请在这一部分说明你的项目不同寻常的特色，为什么需要大家的支持以及详细的资金用途，这会增加你项目的可信度并由此提高筹资的成功率。</p>
+                        <h2>我的承诺与回报（也可使用个性化小标题）</h2>
+                        <p>请在此处展示你为支持者准备的回报，回报方式将是左右项目能否筹资成功的关键因素，建议设定两个以上的回报方式，保证有趣且可行，并明确实现回报的时间。</p>
+                        <h2>可能存在的风险（也可使用个性化小标题）</h2>
+                        <p>请在此标注你的项目在实施过程中可能存在的风险，让支持者对你的项目有全面而清晰的认识。</p>
+                        <h2>其他备注信息（也可使用个性化小标题）</h2>
+                        <p>其他需要支持者了解的信息。</p>
+                        <?php echo set_value( 'pro_text') ?>
+                    </textarea>
+                    <?php echo form_error( 'pro_text', '<span>', '</span>') ?>
+                </td>
+            </tr>
+            <tr>
+                
+                <div style="width:220px;margin:0 auto;">
+                <!--   <td>
+
+
+                        请选择日期：
+                        <input name="pro_start" type="text" value="" size="14" readonly onClick="showcalendar(event,this);" onFocus="showcalendar(event, this);if(this.value=='0000-00-00')this.value=''">请选择日期：
+                        <input name="pro_end" type="text" value="" size="14" readonly onClick="showcalendar(event,this);" onFocus="showcalendar(event, this);if(this.value=='0000-00-00')this.value=''">
+                    </td>
+                  --> 
+                </div>
+
+            </tr>
+            <tr>
+                <td colspan="10">
+                    <input type="submit" class="input_button" value="发布" />
+                </td>
+            </tr>
+        </table>
+    </form>
+</body>
+
+</html>

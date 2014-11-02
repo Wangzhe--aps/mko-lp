@@ -1,0 +1,187 @@
+<script>
+$(function() {
+    //设计案例切换
+    $('.title-list li').mouseover(function() {
+        var liindex = $('.title-list li').index(this);
+        $(this).addClass('on').siblings().removeClass('on');
+        $('.product-wrap div.product').eq(liindex).fadeIn(150).siblings('div.product').hide();
+        var liWidth = $('.title-list li').width();
+        $('.case .title-list p').stop(false, true).animate({
+            'left': liindex * liWidth + 'px'
+        }, 300);
+    });
+});
+</script>
+<style>
+    
+
+.fl {
+    display: inline;
+    float: left
+}
+.fr {
+    display: inline;
+    float: right
+}
+.cf:after {
+    content: "";
+    clear: both;
+    display: block;
+    height: 0;
+    overflow: hidden
+}
+.cf {
+    zoom: 1
+}
+.pb10 {
+    padding-bottom: 10px
+}
+.mt10 {
+    margin-top: 10px
+}
+/*main*/
+
+.case {
+   background: #fff;
+    padding: 15px;
+    box-shadow: 0 0 10px #ccc;
+}
+.case .title {
+    height: 20px;
+    border-bottom: 3px solid #e7e7e7;
+    padding-bottom: 40px;
+}
+.case .title h2 {
+    font-size: 20px;
+    font-family: "microsoft yahei";
+}
+.case .title-list {
+    position: relative;
+    top: 6px;
+}
+.case .title-list li {
+    width: 146px;
+    line-height: 20px;
+    text-align: center;
+    float: left;
+    display: inline;
+}
+.case .title-list li.on {
+    color: #0067D2;
+    font-weight: bold;
+}
+.case .title-list p {
+    position: absolute;
+    top: 24px;
+    left: 0px;
+    width: 146px;
+    height: 7px;
+    border-top: 3px solid #0067D2;
+    overflow: hidden;
+    text-align: center;
+}
+.case .title-list b {
+    display: inline-block;
+    width: 0;
+    height: 0;
+    margin-top: -3px;
+    /*border-style: solid dashed dashed dashed;*/
+    border-width: 9px;
+    border-color: #0067D2 #fff #fff #fff;
+    overflow: hidden;
+    zoom: 1;
+    font-size: 0;
+}
+.product {
+    min-height: 268px;
+    position: relative;
+    overflow: hidden;
+    display: none;
+    margin-top: 20px;
+}
+.product ul {
+    position: absolute;
+    left: 0px;
+}
+.product-wrap .show {
+    display: block;
+}
+.product-wrap .product li {
+    float: left;
+    display: inline;
+    margin-left: 13px;
+    background: #f3f3f3;
+    border: 2px solid #fafafa;
+    transition: 0.4s;
+    -webkit-transition: 0.4s;
+    -moz-transition: 0.4s;
+    -o-transition: 0.4s;
+    -ms-transition: 0.4s;
+}
+.product-wrap .product li.ml0 {
+    margin-left: 0px;
+}
+.product-wrap .product li a.imgwrap {
+    display: block;
+    width: 226px;
+    height: 200px;
+    background: #fff;
+    text-align: center;
+}
+.product-wrap .product li p {
+    padding-left: 15px;
+    color: #666666;
+    line-height: 22px;
+}
+.product-wrap .product li p a {
+    color: #666666;
+    text-decoration: none;
+}
+.product-wrap .product li p a:hover {
+    color: #0067D2;
+    text-decoration: none;
+}
+</style>
+<div class="case">
+    <div class="title cf">
+        <ul class="title-list fl cf ">
+            <li class="on">项目主页</li>
+            <li>项目披露</li>
+            <li>项目历程</li>
+            <li>讨论组</li>
+            <li>捐赠者榜单</li>
+            <p><b></b>
+            </p>
+        </ul>
+    </div>
+    <div class="product-wrap">
+        <!--项目主页-->
+        <div class="product">
+        <!--                        项目视频-->
+        <?php if($pro[0][ 'pro_video']){ ?>
+        <p>
+            <embed src="<?php echo $pro[0]['pro_video'] ?>" allowfullscreen="ture" isAutoPlay=true quality="high" width="780" height="500" align="middle" type="application/x-shockwave-flash" flashvars="winType=index" style="visibility:visible;" />
+        </p>
+        <?php } ?>
+        <!--                        项目图片格式-->
+        <?php echo htmlspecialchars_decode($pro[0][ 'pro_det']) ?>
+
+        </div>
+        <!--项目披露-->
+        <div class="product">
+                <p>项目披露</p>
+        </div>
+        <!--项目历程-->
+        <div class="product">
+        </div>
+        <!--案例4-->
+        <div class="product">
+
+        </div>
+        <!--捐赠者榜单-->
+        <div class="product">
+                <p>捐赠者榜单</p>
+            
+        </div>
+    </div>
+</div>
